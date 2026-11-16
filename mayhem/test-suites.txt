@@ -1,0 +1,5 @@
+# Upstream gtest suites (CTest names) that build.sh builds and test.sh runs.
+nimble_common_tests
+nimble_encodings_tests
+nimble_serializer_tests
+nimble_tablet_tests

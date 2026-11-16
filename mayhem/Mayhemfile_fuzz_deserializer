@@ -1,0 +1,13 @@
+project: savantenvs/nimble
+# In-process libFuzzer harness (mayhem/fuzz_deserializer.cpp): the input is one serialized row
+# batch in Nimble's serializer wire format, decoded with nimble::Deserializer against the fixed
+# schema in mayhem/fuzz_deserializer_schema.h.
+target: fuzz_deserializer
+
+cmds:
+  - cmd: /mayhem/fuzz_deserializer
+    libfuzzer: true
+    timeout: 10
+testsuite:
+  - https://$MAYHEM_DOMAIN/$MAYHEM_PROJECT/$MAYHEM_TARGET/testsuite.tar
+  - file://mayhem/fuzz_deserializer/testsuite

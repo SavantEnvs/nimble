@@ -1,0 +1,13 @@
+project: savantenvs/nimble
+# In-process libFuzzer harness (mayhem/fuzz_selective_reader.cpp): the input is a whole Nimble file,
+# scanned through the selective reader (SelectiveNimbleReaderFactory), the dwio::common::Reader
+# implementation query engines use; it has its own column readers and chunk decoders.
+target: fuzz_selective_reader
+
+cmds:
+  - cmd: /mayhem/fuzz_selective_reader
+    libfuzzer: true
+    timeout: 10
+testsuite:
+  - https://$MAYHEM_DOMAIN/$MAYHEM_PROJECT/$MAYHEM_TARGET/testsuite.tar
+  - file://mayhem/fuzz_selective_reader/testsuite

@@ -1,0 +1,25 @@
+# .dockerignore for the commit-image build.
+# Goal: bake in the FULL repo (including .git history — the grader uses it),
+# dropping only local build artifacts and editor/OS cruft. Dev image, not minimal.
+# Lands at the fork root (the build context) when the template is copied in.
+
+# ── Build outputs / local cruft ──────────────────────────────────────────────
+# Keep build artifacts out of the context — the COPY boundary is what separates
+# source from artifacts. build.sh produces its outputs under /mayhem at build time.
+# Nimble's build trees (upstream's Makefile and mayhem/build.sh both build under _build/) and the
+# binaries/report build.sh and test.sh leave at the repo root. Root-anchored on purpose: the openzl
+# submodule keeps sources in directories called build/ (deps/zstd/build/cmake).
+/_build/
+/fuzz_velox_reader
+/fuzz_selective_reader
+/fuzz_encoding
+/fuzz_encoding_legacy
+/fuzz_deserializer
+/fuzz_*-standalone
+/ctrf-report.json
+**/__pycache__/
+
+# ── Editor / OS noise ────────────────────────────────────────────────────────
+.DS_Store
+*.swp
+*~

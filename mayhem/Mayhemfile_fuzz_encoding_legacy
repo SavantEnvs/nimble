@@ -1,0 +1,12 @@
+project: savantenvs/nimble
+# In-process libFuzzer harness (mayhem/fuzz_encoding_legacy.cpp): the input is one encoded stream (a
+# single, possibly nested, Nimble encoding), built with nimble::legacy::EncodingFactory and materialized.
+target: fuzz_encoding_legacy
+
+cmds:
+  - cmd: /mayhem/fuzz_encoding_legacy
+    libfuzzer: true
+    timeout: 10
+testsuite:
+  - https://$MAYHEM_DOMAIN/$MAYHEM_PROJECT/$MAYHEM_TARGET/testsuite.tar
+  - file://mayhem/fuzz_encoding_legacy/testsuite

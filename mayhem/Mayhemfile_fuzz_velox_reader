@@ -1,0 +1,13 @@
+project: savantenvs/nimble
+# In-process libFuzzer harness (mayhem/fuzz_velox_reader.cpp): the input is a whole Nimble file,
+# opened and read row by row through nimble::VeloxReader - tablet footer/stripe metadata, schema,
+# and every stream's encodings decoded into Velox vectors.
+target: fuzz_velox_reader
+
+cmds:
+  - cmd: /mayhem/fuzz_velox_reader
+    libfuzzer: true
+    timeout: 10
+testsuite:
+  - https://$MAYHEM_DOMAIN/$MAYHEM_PROJECT/$MAYHEM_TARGET/testsuite.tar
+  - file://mayhem/fuzz_velox_reader/testsuite
